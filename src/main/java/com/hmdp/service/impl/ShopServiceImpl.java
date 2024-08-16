@@ -50,10 +50,10 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IS
         //Shop shop = cacheChuanTou(id);
         //缓存击穿解决办法-互斥锁
         //Shop shop = cacheJiChuanBylock(id);
-//        Shop shop = cacheClient.getWithCachePassThrough(RedisConstants.CACHE_SHOP_KEY, id, Shop.class, this::getById,
-//                RedisConstants.CACHE_SHOP_TTL, TimeUnit.MINUTES);
-        Shop shop = cacheClient.getWithcacheJiChuanByLogical(RedisConstants.CACHE_SHOP_KEY, id,
-                Shop.class, this::getById, 10L, TimeUnit.SECONDS);
+        Shop shop = cacheClient.getWithCachePassThrough(RedisConstants.CACHE_SHOP_KEY, id, Shop.class, this::getById,
+                RedisConstants.CACHE_SHOP_TTL, TimeUnit.MINUTES);
+//        Shop shop = cacheClient.getWithcacheJiChuanByLogical(RedisConstants.CACHE_SHOP_KEY, id,
+//                Shop.class, this::getById, 10L, TimeUnit.SECONDS);
         if (shop== null){
             return Result.fail("商户不存在");
         }
